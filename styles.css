@@ -5,6 +5,23 @@
 html {
   scrollbar-width: none;
 }
+
+div#modal {
+  height: 100vh;
+  width: 100vw;
+  /* display: flex; */
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background-color: black;
+  position: absolute;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  color: white;
+  display: none;
+  visibility: hidden;
+}
 #content {
   width: 100%;
   flex-direction: column;
@@ -36,12 +53,12 @@ form {
   width: 85%;
   max-width: 50rem;
   gap: 0.7rem;
-  /* text-align: left; */
+  padding-bottom: 9vh;
   display: flex;
   flex-direction: column;
   margin-top: 9rem;
   overflow: auto;
-  height: 60vh;
+  height: 75vh;
 }
 
 input,
@@ -64,11 +81,17 @@ textarea {
 }
 
 #contentButton {
+  background: #f2f4f7;
   position: fixed;
-  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 700;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1vh;
+  bottom: 0;
 }
 
 #generate-pdf {
