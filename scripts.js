@@ -1,4 +1,5 @@
 var horaIncidente = document.getElementById("horaIncidente");
+var modal = document.getElementById("modal");
 const requiredInputs = [
   document.getElementById("selectBandeira"),
   document.getElementById("filial"),
@@ -23,6 +24,11 @@ const requiredInputs = [
   document.getElementById("imageInput3"),
   document.getElementById("imageInput4"),
 ];
+
+function mostrarModal() {
+  modal.style.visibility = "visible";
+  modal.style.display = "flex";
+}
 
 const inputs = document.querySelectorAll('input[type="file"]');
 
@@ -337,10 +343,11 @@ function generatePDF() {
     })
     .from(element)
     .save(`Loja ${filial.value}-Relatório de mau usol.pdf`);
+  mostrarModal();
   setTimeout(function () {
     document.getElementById("content").style.display = "none";
     window.location.reload();
-  }, 10000);
+  }, 7000);
 }
 
 requiredInputs.forEach((input) => {
