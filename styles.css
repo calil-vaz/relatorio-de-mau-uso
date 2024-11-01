@@ -1,0 +1,149 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scrollbar-width: none;
+}
+#content {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body {
+  background: #f2f4f7;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardItem {
+  background-color: white;
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 1px #0867ff92 solid;
+}
+
+form {
+  width: 85%;
+  max-width: 50rem;
+  gap: 0.7rem;
+  /* text-align: left; */
+  display: flex;
+  flex-direction: column;
+  margin-top: 9rem;
+  overflow: auto;
+  height: 60vh;
+}
+
+input,
+select,
+textarea {
+  padding: 0.2rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 1px #0867ff92 solid;
+}
+
+#content_img {
+  position: fixed;
+  padding: 1rem 0;
+  background-color: #f2f4f7;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+#contentButton {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+#generate-pdf {
+  width: 8rem;
+  background: #072f68;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 0.5rem;
+}
+
+#content_img img {
+  width: 10rem;
+}
+
+table {
+  width: 90%;
+  margin-left: 38px;
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 4px;
+}
+th {
+  background-color: white;
+}
+
+div.header,
+div.footer {
+  width: 100%;
+  text-align: center;
+}
+
+div.header img {
+  width: 20%;
+}
+div.footer img {
+  width: -webkit-fill-available;
+}
+td img {
+  height: 415px;
+  max-width: fit-content;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 8px 15px;
+  cursor: pointer;
+  background-color: #072f68;
+  color: white;
+  border: 1px solid #072f68;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+.custom-file-upload.selected {
+  background-color: #28a745; /* Cor verde indicando seleção */
+  border-color: #28a745;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+input.error,
+select.error,
+textarea.error {
+  border: 2px solid red;
+}
