@@ -340,7 +340,7 @@ function generatePDF() {
   setTimeout(function () {
     document.getElementById("content").style.display = "none";
     window.location.reload();
-  }, 2000);
+  }, 10000);
 }
 
 requiredInputs.forEach((input) => {
