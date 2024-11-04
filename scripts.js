@@ -341,7 +341,7 @@ function generatePDF() {
       margin: [0, 0, 0, 0],
     })
     .from(element)
-    .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4]}.pdf`);
+    .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`);
   mostrarModal();
   setTimeout(function () {
     document.getElementById("content").style.display = "none";
