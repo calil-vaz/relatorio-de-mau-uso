@@ -1,5 +1,6 @@
 var horaIncidente = document.getElementById("horaIncidente");
 var modal = document.getElementById("modal");
+var dataAquisicao = document.getElementById("dataAquisicao");
 const requiredInputs = [
   document.getElementById("selectBandeira"),
   document.getElementById("filial"),
@@ -11,7 +12,6 @@ const requiredInputs = [
   document.getElementById("numSerie"),
   document.getElementById("patrimonio"),
   document.getElementById("setor"),
-  document.getElementById("dataAquisicao"),
   document.getElementById("descricaoDetalhada"),
   document.getElementById("impactoFuncionamento"),
   document.getElementById("danosEquipamento"),
@@ -194,7 +194,7 @@ function generatePDF() {
                     </tr>
                     <tr>
                         <th>DATA DE AQUISIÇÃO DO EQUIPAMENTO:</th>
-                        <th>${formatarData(requiredInputs[10].value)}</th>
+                        <th>${formatarData(dataAquisicao.value)}</th>
                         <th style="width: 25%;">DATA E HORA DO INCIDENTE</th>
                         <th style="width: 20%;">${horaIncidente.value.toUpperCase()}</th>
                     </tr>
@@ -341,7 +341,9 @@ function generatePDF() {
       margin: [0, 0, 0, 0],
     })
     .from(element)
-    .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`);
+    .save(
+      `Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`
+    );
   mostrarModal();
   setTimeout(function () {
     document.getElementById("content").style.display = "none";
