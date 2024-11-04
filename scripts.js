@@ -111,7 +111,7 @@ function generatePDF() {
         background: "red",
       },
     }).showToast();
-    // return;
+     return;
   }
 
   // Função original de geração do PDF
@@ -336,6 +336,21 @@ function generatePDF() {
   // Exibe o conteúdo para o PDF
   document.getElementById("content").style.display = "block";
   const element = document.getElementById("content");
+  /*
+  html2pdf()
+    .set({
+      margin: [0, 0, 0, 0],
+    })
+    .from(element)
+    .save(
+      `Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`
+    );
+  mostrarModal();
+  setTimeout(function () {
+    document.getElementById("content").style.display = "none";
+    window.location.reload();
+  }, 7000);
+  */
   mostrarModal();
   html2pdf().set({
     margin: [0, 0, 0, 0],
@@ -345,6 +360,7 @@ function generatePDF() {
   .then(() => {
     // Ocultar o modal ao finalizar o download
     document.getElementById('modal').style.display = 'none';
+    window.location.reload();
 }).catch(error => {
     console.error("Erro ao gerar o PDF:", error);
     document.getElementById('modal').style.display = 'none';
