@@ -111,7 +111,7 @@ function generatePDF() {
         background: "red",
       },
     }).showToast();
-    return;
+    // return;
   }
 
   // Função original de geração do PDF
@@ -216,7 +216,7 @@ function generatePDF() {
                                 ocorreu.
                                 Incluir se houve envolvimento de funcionários ou clientes.)</small>
                         </th>
-                        <th>${requiredInputs[11].value.toUpperCase()}</th>
+                        <th>${requiredInputs[10].value.toUpperCase()}</th>
                     </tr>
                 </thead>
             </table>
@@ -235,7 +235,7 @@ function generatePDF() {
                             <small>(Descrever como o mau uso afetou as operações da loja como: atrasos, perda de
                                 vendas,etc.)</small>
                         </th>
-                        <th>${requiredInputs[12].value.toUpperCase()}</th>
+                        <th>${requiredInputs[11].value.toUpperCase()}</th>
                     </tr>
                     <tr>
                         <th style="width: 30%; height: 190px;">
@@ -243,7 +243,7 @@ function generatePDF() {
                             <small>(Descrever se houve danos físicos, necessidade de reparos ou substituição de
                                 equipamento.)</small>
                         </th>
-                        <th>${requiredInputs[13].value.toUpperCase()}</th>
+                        <th>${requiredInputs[12].value.toUpperCase()}</th>
                     </tr>
                 </thead>
             </table>
@@ -268,7 +268,7 @@ function generatePDF() {
                             MEDIDAS IMEDIATAS:
                             <small>(Descrever as ações tomadas imediatamente após o incidente.)</small>
                         </th>
-                        <th>${requiredInputs[14].value.toUpperCase()}</th>
+                        <th>${requiredInputs[13].value.toUpperCase()}</th>
                     </tr>
                     <tr>
                         <th style="width: 30%; height: 180px;">
@@ -277,7 +277,7 @@ function generatePDF() {
                                 sinalizações,
                                 etc.)</small>
                         </th>
-                        <th>${requiredInputs[15].value.toUpperCase()}</th>
+                        <th>${requiredInputs[14].value.toUpperCase()}</th>
                     </tr>
                 </thead>
             </table>
@@ -298,7 +298,7 @@ function generatePDF() {
                             NOME(S) DO(S) FUNCIONÁRIO(S) ENVOLVIDO(S):
                         </th>
                         <th>
-                        ${requiredInputs[16].value.toUpperCase()}
+                        ${requiredInputs[15].value.toUpperCase()}
                         </th>
                     </tr>
                     <tr>
@@ -306,7 +306,7 @@ function generatePDF() {
                             NOME DO SUPERVISOR:
                         </th>
                         <th>
-                        ${requiredInputs[17].value.toUpperCase()}
+                        ${requiredInputs[16].value.toUpperCase()}
                         </th>
                     </tr>
                     <tr>
@@ -336,19 +336,19 @@ function generatePDF() {
   // Exibe o conteúdo para o PDF
   document.getElementById("content").style.display = "block";
   const element = document.getElementById("content");
-  html2pdf()
-    .set({
-      margin: [0, 0, 0, 0],
-    })
-    .from(element)
-    .save(
-      `Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`
-    );
   mostrarModal();
-  setTimeout(function () {
-    document.getElementById("content").style.display = "none";
-    window.location.reload();
-  }, 7000);
+  html2pdf().set({
+    margin: [0, 0, 0, 0],
+  })
+  .from(element)
+  .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`)
+  .then(() => {
+    // Ocultar o modal ao finalizar o download
+    document.getElementById('modal').style.display = 'none';
+}).catch(error => {
+    console.error("Erro ao gerar o PDF:", error);
+    document.getElementById('modal').style.display = 'none';
+});
 }
 
 requiredInputs.forEach((input) => {
