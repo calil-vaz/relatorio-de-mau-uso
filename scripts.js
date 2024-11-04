@@ -338,10 +338,10 @@ function generatePDF() {
   const element = document.getElementById("content");
   html2pdf()
     .set({
-      margin: [-5, 0, 0, 0],
+      margin: [0, 0, 0, 0],
     })
     .from(element)
-    .save(`Loja ${filial.value}-Relatório de mau usol.pdf`);
+    .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4]}.pdf`);
   mostrarModal();
   setTimeout(function () {
     document.getElementById("content").style.display = "none";
