@@ -334,12 +334,11 @@ function generatePDF() {
   content.insertBefore(beforeElement, anexos);
   content.append(afterElement);
   // Exibe o conteúdo para o PDF
-  document.getElementById("form").style.marginBottom = "8rem";
   document.getElementById("content").style.display = "block";
   const element = document.getElementById("content");
   html2pdf()
     .set({
-      margin: [0, 0, 0, 0],
+      margin: [-5, 0, 0, 0],
     })
     .from(element)
     .save(`Loja ${filial.value}-Relatório de mau usol.pdf`);
