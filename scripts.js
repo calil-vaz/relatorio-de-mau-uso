@@ -323,7 +323,7 @@ function generatePDF() {
                     </tr>
                 </thead>
             </table>
-            <div class="footer" style="margin: 317px 0 10px 0;">
+            <div class="footer" style="margin: 300px 0 10px 0;">
                 <img src="./img/footer.png" alt="">
             </div>
   `;
