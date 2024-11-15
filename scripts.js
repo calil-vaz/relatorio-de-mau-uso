@@ -1,6 +1,9 @@
 var horaIncidente = document.getElementById("horaIncidente");
 var modal = document.getElementById("modal");
 var dataAquisicao = document.getElementById("dataAquisicao");
+var html = document.querySelector("html")
+var body = document.querySelector("body")
+
 const requiredInputs = [
   document.getElementById("selectBandeira"),
   document.getElementById("filial"),
@@ -26,9 +29,11 @@ const requiredInputs = [
 ];
 
 function mostrarModal() {
-  modal.style.visibility = "visible";
-  modal.style.display = "flex";
-}
+    html.style.overflow = "hidden"
+    body.style.overflow = "hidden"
+    modal.style.visibility = "visible";
+    modal.style.display = "flex";
+  }
 
 const inputs = document.querySelectorAll('input[type="file"]');
 
