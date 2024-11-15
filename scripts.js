@@ -33,7 +33,7 @@ function mostrarModal() {
 const inputs = document.querySelectorAll('input[type="file"]');
 
 inputs.forEach((input) => {
-  const label = document.querySelector(label[for=${input.id}]);
+  const label = document.querySelector(`label[for=${input.id}]`);
 
   input.addEventListener("change", function () {
     if (input.files.length > 0) {
@@ -45,7 +45,7 @@ inputs.forEach((input) => {
 
 function formatarData(data) {
   let date = data.split("-");
-  const dateBR = ${date[2]}/${date[1]}/${date[0]};
+  const dateBR = `${date[2]}/${date[1]}/${date[0]}`;
   return dateBR;
 }
 
@@ -341,7 +341,7 @@ function generatePDF() {
     margin: [0, 0, 0, 0],
   })
   .from(element)
-  .save(Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf)
+  .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`)
   .then(() => {
     // Ocultar o modal ao finalizar o download
     window.location.reload();
