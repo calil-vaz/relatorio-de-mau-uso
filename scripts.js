@@ -1,5 +1,3 @@
-var html = document.querySelector("html")
-var body = document.querySelector("body")
 var horaIncidente = document.getElementById("horaIncidente");
 var modal = document.getElementById("modal");
 var dataAquisicao = document.getElementById("dataAquisicao");
@@ -28,8 +26,6 @@ const requiredInputs = [
 ];
 
 function mostrarModal() {
-  html.style.overflow = "hidden"
-  body.style.overflow = "hidden"
   modal.style.visibility = "visible";
   modal.style.display = "flex";
 }
@@ -37,7 +33,7 @@ function mostrarModal() {
 const inputs = document.querySelectorAll('input[type="file"]');
 
 inputs.forEach((input) => {
-  const label = document.querySelector(`label[for=${input.id}]`);
+  const label = document.querySelector(label[for=${input.id}]);
 
   input.addEventListener("change", function () {
     if (input.files.length > 0) {
@@ -49,7 +45,7 @@ inputs.forEach((input) => {
 
 function formatarData(data) {
   let date = data.split("-");
-  const dateBR = `${date[2]}/${date[1]}/${date[0]}`;
+  const dateBR = ${date[2]}/${date[1]}/${date[0]};
   return dateBR;
 }
 
@@ -340,25 +336,19 @@ function generatePDF() {
   // Exibe o conteúdo para o PDF
   document.getElementById("content").style.display = "block";
   const element = document.getElementById("content");
-    if (elementoComFoco != null) {
-    elementoComFoco = null
-  }
   mostrarModal();
-  setTimeout(
-    function () {
-        html2pdf().set({
-            margin: [0, 0, 0, 0],
-          })
-          .from(element)
-          .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`)
-          .then(() => {
-            window.location.reload();
-        }).catch(error => {
-            console.error("Erro ao gerar o PDF:", error);
-            document.getElementById('modal').style.display = 'none';
-        });
-    },100
-)
+  html2pdf().set({
+    margin: [0, 0, 0, 0],
+  })
+  .from(element)
+  .save(Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf)
+  .then(() => {
+    // Ocultar o modal ao finalizar o download
+    window.location.reload();
+}).catch(error => {
+    console.error("Erro ao gerar o PDF:", error);
+    document.getElementById('modal').style.display = 'none';
+});
 }
 
 requiredInputs.forEach((input) => {
