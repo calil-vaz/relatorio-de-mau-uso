@@ -1,3 +1,5 @@
+var html = document.querySelector("html")
+var body = document.querySelector("body")
 var horaIncidente = document.getElementById("horaIncidente");
 var modal = document.getElementById("modal");
 var dataAquisicao = document.getElementById("dataAquisicao");
@@ -26,6 +28,8 @@ const requiredInputs = [
 ];
 
 function mostrarModal() {
+  html.style.overflow = "hidden"
+  body.style.overflow = "hidden"
   modal.style.visibility = "visible";
   modal.style.display = "flex";
 }
@@ -336,19 +340,25 @@ function generatePDF() {
   // Exibe o conteúdo para o PDF
   document.getElementById("content").style.display = "block";
   const element = document.getElementById("content");
+    if (elementoComFoco != null) {
+    elementoComFoco = null
+  }
   mostrarModal();
-  html2pdf().set({
-    margin: [0, 0, 0, 0],
-  })
-  .from(element)
-  .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`)
-  .then(() => {
-    // Ocultar o modal ao finalizar o download
-    window.location.reload();
-}).catch(error => {
-    console.error("Erro ao gerar o PDF:", error);
-    document.getElementById('modal').style.display = 'none';
-});
+  setTimeout(
+    function () {
+        html2pdf().set({
+            margin: [0, 0, 0, 0],
+          })
+          .from(element)
+          .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`)
+          .then(() => {
+            window.location.reload();
+        }).catch(error => {
+            console.error("Erro ao gerar o PDF:", error);
+            document.getElementById('modal').style.display = 'none';
+        });
+    },100
+)
 }
 
 requiredInputs.forEach((input) => {
