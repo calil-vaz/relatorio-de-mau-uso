@@ -1,8 +1,8 @@
 var horaIncidente = document.getElementById("horaIncidente");
 var modal = document.getElementById("modal");
 var dataAquisicao = document.getElementById("dataAquisicao");
-var html = document.querySelector("html")
-var body = document.querySelector("body")
+var html = document.querySelector("html");
+var body = document.querySelector("body");
 
 const requiredInputs = [
   document.getElementById("selectBandeira"),
@@ -29,11 +29,11 @@ const requiredInputs = [
 ];
 
 function mostrarModal() {
-    html.style.overflow = "hidden"
-    body.style.overflow = "hidden"
-    modal.style.visibility = "visible";
-    modal.style.display = "flex";
-  }
+  html.style.overflow = "hidden";
+  body.style.overflow = "hidden";
+  modal.style.visibility = "visible";
+  modal.style.display = "flex";
+}
 
 const inputs = document.querySelectorAll('input[type="file"]');
 
@@ -95,16 +95,14 @@ function generatePDF() {
 
   requiredInputs.forEach((input) => {
     if (!input.value) {
-      input.style.border = "1px solid red";
+      input.style.border = "2px solid red";
       allFieldsFilled = false;
     } else {
       input.style.border = "1px solid #0867ff92";
     }
   });
 
-  // Se algum campo não estiver preenchido, exibe mensagem e não gera o PDF
   if (!allFieldsFilled) {
-    // alert("Por favor, preencha todos os campos obrigatórios.");
     Toastify({
       text: "Preencha todos os campos obrigatórios",
       duration: 3000,
@@ -116,17 +114,14 @@ function generatePDF() {
         background: "red",
       },
     }).showToast();
-     return;
+    return;
   }
 
-  // Função original de geração do PDF
   let beforeElement = document.createElement("div");
   let afterElement = document.createElement("div");
 
   beforeElement.innerHTML = `
-    <div class="header">
-                <img src="./img/logo-gp-pereira.svg" alt="">
-            </div>
+
             <table>
                 <thead>
                     <tr>
@@ -215,7 +210,7 @@ function generatePDF() {
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 30%; height: 190px;">
+                        <th style="width: 30%; height: 160px;">
                             DESCRIÇÃO DETALHADA DO MAU USO
                             <small>(Descrever o que aconteceu, como foi o mau uso e as circunstâncias em que
                                 ocorreu.
@@ -235,7 +230,7 @@ function generatePDF() {
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 30%; height: 190px;">
+                        <th style="width: 30%; height: 160px;">
                             IMPACTO NO FUNCIONAMENTO:
                             <small>(Descrever como o mau uso afetou as operações da loja como: atrasos, perda de
                                 vendas,etc.)</small>
@@ -243,23 +238,17 @@ function generatePDF() {
                         <th>${requiredInputs[11].value.toUpperCase()}</th>
                     </tr>
                     <tr>
-                        <th style="width: 30%; height: 190px;">
+                        <th style="width: 30%; height: 160px;">
                             DANOS NO EQUIPAMENTO:
                             <small>(Descrever se houve danos físicos, necessidade de reparos ou substituição de
                                 equipamento.)</small>
                         </th>
                         <th>${requiredInputs[12].value.toUpperCase()}</th>
                     </tr>
-                </thead>
+                    </thead>
             </table>
-            <div class="footer" style="margin: 30px 0;">
-                <img src="./img/footer.png" alt="">
-            </div>
-
-            <div class="header">
-                <img src="./img/logo-gp-pereira.svg" alt="">
-            </div>
-            <table>
+            
+            <table class="page-break"">
                 <thead>
                     <tr>
                         <th style="text-align: center;">4.AÇÕES CORRETIVAS</th>
@@ -328,9 +317,6 @@ function generatePDF() {
                     </tr>
                 </thead>
             </table>
-            <div class="footer" style="margin: 300px 0 10px 0;">
-                <img src="./img/footer.png" alt="">
-            </div>
   `;
 
   content.insertBefore(beforeElement, anexos);
@@ -338,30 +324,56 @@ function generatePDF() {
 
   content.insertBefore(beforeElement, anexos);
   content.append(afterElement);
-  // Exibe o conteúdo para o PDF
   document.getElementById("content").style.display = "block";
   const element = document.getElementById("content");
   mostrarModal();
-  html2pdf().set({
-    margin: [0, 0, 0, 0],
-  })
-  .from(element)
-  .save(`Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`)
-  .then(() => {
-    // Ocultar o modal ao finalizar o download
-    window.location.reload();
-}).catch(error => {
-    console.error("Erro ao gerar o PDF:", error);
-    document.getElementById('modal').style.display = 'none';
-});
+
+  html2pdf()
+    .set({
+      margin: [25, 0, 25, 0], 
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: { mode: ["css", "legacy"] },
+    })
+    .from(element)
+    .toPdf()
+    .get("pdf")
+    .then((pdf) => {
+      const pageCount = pdf.internal.getNumberOfPages();
+
+      const pageWidth = pdf.internal.pageSize.getWidth(); 
+      const pageHeight = pdf.internal.pageSize.getHeight(); 
+
+      for (let i = 1; i <= pageCount; i++) {
+        pdf.setPage(i);
+
+        pdf.addImage("./img/logo-gp-pereira 2.png", "PNG", 85, -4, 40, 40);
+        
+        pdf.addImage(
+          "./img/footer.png",
+          "PNG", 
+          0, 
+          pageHeight - 20, 
+          pageWidth - 0, 
+          15 
+        );
+      }
+
+      pdf.save(
+        `Loja ${filial.value}_Relatório de mau uso_${requiredInputs[4].value}.pdf`
+      );
+    })
+    .then(() => {
+      window.location.reload();
+    });
 }
 
 requiredInputs.forEach((input) => {
   input.addEventListener("input", () => {
     if (input.value) {
-      input.style.border = "1px solid #0867ff92"; // Restaura a borda normal
+      input.style.border = "1px solid #0867ff92";
     } else {
-      input.style.border = "1px solid red"; // Borda vermelha se ainda estiver vazio
+      input.style.border = "1px solid red"; 
     }
   });
 });
